@@ -3,7 +3,7 @@ Gem::Specification.new do |s|
   s.version     = '0.0.1'
   s.date        = '2017-01-27'
   s.summary     = 'Screen Element'
-  s.description = 'A lib to create screen element that can be used with Appium or Calabash'
+  s.description = 'A lib to create screen elements that can be used with Appium or Calabash automation'
   s.authors     = ['Oscar Tanner']
   s.email       = 'oscarpanda@gmail.com'
   s.files       = ['lib/screen_element.rb']
