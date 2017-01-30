@@ -9,4 +9,6 @@ Gem::Specification.new do |s|
   s.files       = ['lib/screen_element.rb']
   s.homepage    = 'http://rubygems.org/gems/screen_element'
   s.license     = 'MIT'
+  #  s.add_runtime_dependency "daemons", ["= 1.1.0"]
+  #  s.add_development_dependency "bourne", [">= 0"]
 end
