@@ -29,24 +29,24 @@ module ScreenElement
         $driver.start_driver # TODO: ver se launsh_app funciona
       end
 
-      def self.promote_appium_methods
-        Appium::Driver.new(ScreenElement::AppiumEnv::World.caps)
-        Appium.promote_appium_methods ScreenElement::AppiumEnv::World
+      def self.promote_appium_methods(opt = {})
+        Appium::Driver.new(caps(opt))
+        Appium.promote_appium_methods self
       end
 
-      def start_driver
+      def self.start_driver
         $driver.start_driver
       end
 
-      def driver_quit
+      def self.driver_quit
         $driver.driver_quit
       end
 
-      def launch_app
+      def self.launch_app
         $driver.launch_app
       end
 
-      def close_app
+      def self.close_app
         $driver.close_app
       end
     end
