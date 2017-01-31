@@ -4,7 +4,7 @@ require 'pry'
 describe 'Element Interface' do
   before(:each) do
     @classes = [ScreenElement::AppiumEnv::Element]
-    @number_public_instance_methods = 6
+    @interface_methods = [:text, :visible!, :visible?, :touch, :drag, :swipe]
   end
 
   # after(:each) do
@@ -12,10 +12,10 @@ describe 'Element Interface' do
 
   describe 'Implemented methods' do
     context 'All Element classes should have the same interface methods' do
-      it 'All classes should have the same number of public instance methods (@number_public_instance_methods)' do
+      it 'The instance methods should be equal to @interface_methods' do
         @classes.each do |clazz|
-          expect(clazz.instance_methods(false).size)
-            .to be(@number_public_instance_methods)
+          expect(clazz.instance_methods(false).sort)
+            .to eq(@interface_methods.sort)
         end
       end
     end
