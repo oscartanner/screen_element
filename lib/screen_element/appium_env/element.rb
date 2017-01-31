@@ -1,5 +1,5 @@
 module ScreenElement
-  module Appium
+  module AppiumEnv
     class Element < World
       def initialize(type, identificator)
         if type == :desc
