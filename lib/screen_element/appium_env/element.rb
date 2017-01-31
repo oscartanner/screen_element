@@ -5,6 +5,9 @@ module ScreenElement
         if type == :desc
           @type = :xpath
           @identificator = "//*[@content-desc='#{identificator}']"
+        elsif type == :text
+          @type = :xpath
+          @identificator = "//*[@text='#{identificator}']"
         else
           @type = type
           @identificator = identificator
@@ -24,6 +27,26 @@ module ScreenElement
       def visible?(opt = {})
         begin
           visible!(opt)
+        rescue
+          return false
+        end
+        true
+      end
+
+      def not_visible!(opt = {})
+        timeout = opt.fetch(:timeout, 10)
+        begin
+          sleep(2) # To avoid flaky tests
+          wait_true(timeout) { !exists { element } }
+        rescue => e
+          raise ElementFoundError,
+                "Element with #{@type}: '#{@identificator}' found!\n#{e.message}"
+        end
+      end
+
+      def not_visible?(opt = {})
+        begin
+          not_visible!(opt)
         rescue
           return false
         end
@@ -51,17 +74,17 @@ module ScreenElement
                       delta_x: delta_x, delta_y: delta_y)
       end
 
-      # TODO: See if would be nice to implement these methods with method missing
-      # to avoid creating all these accessor methods for element attributes
-      def text
-        element.text
-      end
-
       def enter(text, opt = {})
         close_keyboard = opt.fetch(:close_keyboard, false)
 
         element.send_keys text
         hide_keyboard if close_keyboard
+      end
+
+      # TODO: See if would be nice to implement these methods with method missing
+      # to avoid creating all these accessor methods for element attributes
+      def text
+        element.text
       end
 
       private

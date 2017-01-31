@@ -4,7 +4,8 @@ require 'pry'
 describe 'Element Interface' do
   before(:each) do
     @classes = [ScreenElement::AppiumEnv::Element]
-    @interface_methods = [:text, :visible!, :visible?, :touch, :drag, :swipe, :enter]
+    @interface_methods = [:text, :visible!, :visible?, :not_visible!,
+                          :not_visible?, :touch, :drag, :swipe, :enter]
   end
 
   # after(:each) do
