@@ -1,2 +1,2 @@
-require 'require_all'
-require_all File.dirname(__FILE__)
+require_relative "#{File.dirname(__FILE__)}/screen_element/appium_env/world"
+require_relative "#{File.dirname(__FILE__)}/screen_element/appium_env/element"

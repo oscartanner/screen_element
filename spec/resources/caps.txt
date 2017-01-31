@@ -1,0 +1,5 @@
+[caps]
+platformName = "Android"
+appPackage = "com.app.package"
+app = "path_to.apk"
+deviceName = "Android Emulator"

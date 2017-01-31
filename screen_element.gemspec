@@ -14,7 +14,6 @@ Gem::Specification.new do |s|
   s.test_files      = s.files.grep(%r{^(test|spec|features)/})
 
   s.add_runtime_dependency 'rake', ['>= 12.0.0']
-  s.add_runtime_dependency 'require_all', ['>= 1.4.0']
   s.add_runtime_dependency 'appium_lib', ['>= 9.3.0']
 
   s.add_development_dependency 'rspec', ['>= 3.5.0']
