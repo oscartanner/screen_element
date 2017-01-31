@@ -17,7 +17,7 @@ module ScreenElement
           wait_true(timeout) { element.displayed? }
         rescue => e
           raise ElementNotFoundError,
-            "Element with #{@type}: '#{@identificator}' not found!\n#{e.message}"
+                "Element with #{@type}: '#{@identificator}' not found!\n#{e.message}"
         end
       end
 
@@ -39,7 +39,7 @@ module ScreenElement
         delta_x = opt.fetch(:delta_x, 0)
         delta_y = opt.fetch(:delta_y, 0)
         Appium::TouchAction.new.long_press(element: element)
-        .move_to(x: delta_x, y: delta_y).release.perform
+                           .move_to(x: delta_x, y: delta_y).release.perform
       end
 
       def swipe(opt = {})
@@ -48,7 +48,7 @@ module ScreenElement
         location = element.location
         # TODO: Remove global variable $driver
         $driver.swipe(start_x: location[:x], start_y: location[:y],
-          delta_x: delta_x, delta_y: delta_y)
+                      delta_x: delta_x, delta_y: delta_y)
       end
 
       # TODO: See if would be nice to implement these methods with method missing
@@ -57,8 +57,11 @@ module ScreenElement
         element.text
       end
 
-      def enter(text)
+      def enter(text, opt = {})
+        close_keyboard = opt.fetch(:close_keyboard, false)
+
         element.send_keys text
+        hide_keyboard if close_keyboard
       end
 
       private
