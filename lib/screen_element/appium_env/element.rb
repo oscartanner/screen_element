@@ -57,6 +57,10 @@ module ScreenElement
         element.text
       end
 
+      def enter(text)
+        element.send_keys text
+      end
+
       private
 
       def element
