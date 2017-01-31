@@ -9,7 +9,7 @@ Before do |scenario|
 
   if ENV['PROFILE'] != 'saucelabs' || !FeatureMemory.feature.nil?
     if FeatureMemory.feature != @feature_name ||
-       scenario.source_tag_names.include?('@wip')
+       scenario.source_tag_names.include?('@reinstall_before')
       World.reinstall_app
     else
       World.launch_app unless FeatureMemory.feature.nil?
