@@ -1,5 +1,4 @@
 require 'screen_element'
-require 'pry'
 
 describe 'Element Interface' do
   before(:each) do
