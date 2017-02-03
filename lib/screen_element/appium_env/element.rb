@@ -1,11 +1,14 @@
 module ScreenElement
   module AppiumEnv
     class Element < World
+      include OCRHelperModule
+
       def initialize(type, identificator)
-        if type == :desc
+        case type
+        when :desc
           @type = :xpath
           @identificator = "//*[@content-desc='#{identificator}']"
-        elsif type == :text
+        when :text
           @type = :xpath
           @identificator = "//*[@text='#{identificator}']"
         else
@@ -15,12 +18,22 @@ module ScreenElement
       end
 
       def visible!(opt = {})
-        timeout = opt.fetch(:timeout, 10)
-        begin
-          wait_true(timeout) { element.displayed? }
-        rescue => e
+        # For toast elements, we use image recognition to locate messages
+        # on the screen
+        if @type == :toast
           raise ElementNotFoundError,
-                "Element with #{@type}: '#{@identificator}' not found!\n#{e.message}"
+                "Element with #{@type}: '#{@identificator}' not found!\n" unless
+                  text_in_image?(@identificator)
+
+        else
+          timeout = opt.fetch(:timeout, 10)
+
+          begin
+            wait_true(timeout) { element.displayed? }
+          rescue => e
+            raise ElementNotFoundError,
+                  "Element with #{@type}: '#{@identificator}' not found!\n#{e.message}"
+          end
         end
       end
 

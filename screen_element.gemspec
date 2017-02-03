@@ -15,6 +15,8 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'rake', ['>= 12.0.0']
   s.add_runtime_dependency 'appium_lib', ['>= 9.3.0']
+  s.add_runtime_dependency 'rmagick', ['>= 2.16.0']
+  s.add_runtime_dependency 'rtesseract', ['>= 2.1.0']
 
   s.add_development_dependency 'rspec', ['>= 3.5.0']
 end
