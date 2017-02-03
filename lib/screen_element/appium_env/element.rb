@@ -81,6 +81,10 @@ module ScreenElement
         hide_keyboard if close_keyboard
       end
 
+      def checked?
+        element.attribute('checked') == 'true'
+      end
+
       # TODO: See if would be nice to implement these methods with method missing
       # to avoid creating all these accessor methods for element attributes
       def text
