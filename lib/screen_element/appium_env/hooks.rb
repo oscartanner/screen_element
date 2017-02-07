@@ -19,7 +19,7 @@ Before do |scenario|
 end
 
 After do |scenario|
-  World.take_screenshot if scenario.failed?
+  embed World.take_screenshot, 'image/png' if scenario.failed?
   World.close_app
 end
 

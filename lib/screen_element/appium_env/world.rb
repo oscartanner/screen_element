@@ -22,6 +22,7 @@ module ScreenElement
         raise 'Path is null!! Please set option[:path].' if path.nil?
 
         $driver.screenshot(File.join(path, file_name))
+        File.join(path, file_name)
       end
 
       def self.reinstall_app
