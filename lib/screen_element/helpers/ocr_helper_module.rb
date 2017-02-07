@@ -82,7 +82,8 @@ module OCRHelperModule
 
   # Creating a folder in system tmp to store the screenshots
   def create_screenshot_path
-    @ocr_screenshots_path = '/tmp/screen_element/ocr_screenshots'
+    @ocr_screenshots_path =
+      File.join(Dir.tmpdir, 'screen_element', 'ocr_screenshots')
     FileUtils.rm_r @ocr_screenshots_path if Dir.exist?(@ocr_screenshots_path)
     FileUtils.mkdir_p @ocr_screenshots_path
   end
