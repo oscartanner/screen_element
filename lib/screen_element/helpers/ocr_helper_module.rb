@@ -65,8 +65,7 @@ module OCRHelperModule
   def recognize_text_on_pic(pic_location = nil)
     img = process_image(pic_location)
     tess = RTesseract.new(img)
-    rec_text = tess.to_s # recognize
-    rec_text
+    tess.to_s # recognize
   end
 
   def process_image(pic_location)
