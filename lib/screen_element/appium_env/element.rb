@@ -91,7 +91,11 @@ module ScreenElement
         close_keyboard = opt.fetch(:close_keyboard, false)
 
         element.send_keys text
-        hide_keyboard if close_keyboard
+        begin
+          hide_keyboard if close_keyboard
+        rescue
+          # If an error occurs here, is because the keyboard is already hidden
+        end
       end
 
       def checked?
