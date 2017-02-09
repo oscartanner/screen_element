@@ -5,7 +5,7 @@ module ScreenElement
 
       attr_accessor :element
 
-      def initialize(type, identificator)
+      def initialize(type, identificator, opt = {})
         case type
         when :desc
           @type = :xpath
@@ -18,6 +18,7 @@ module ScreenElement
           @identificator = identificator
           @element = identificator
         else
+          type = opt.fetch(:array_type, :id) if type == :array
           @type = type
           @identificator = identificator
         end
@@ -119,14 +120,11 @@ module ScreenElement
       end
 
       def element
-        @element = elements.first if @type == :array
         @element || find_element(@type, @identificator)
       end
 
       def elements
-        type = :id
-        type = @type unless @type == :array
-        find_elements(type, @identificator)
+        find_elements(@type, @identificator)
       end
     end
   end

@@ -54,6 +54,10 @@ module ScreenElement
       def self.navigate_back
         $driver.back
       end
+
+      def self.source
+        $driver.get_source
+      end
     end
   end
 end
