@@ -35,7 +35,11 @@ module ScreenElement
           timeout = opt.fetch(:timeout, 10)
 
           begin
-            wait_true(timeout) { element.displayed? }
+            if @type == :array
+              wait_true(timeout) { elements.first.displayed? }
+            else
+              wait_true(timeout) { element.displayed? }
+            end
           rescue => e
             raise ElementNotFoundError,
                   "Element with #{@type}: '#{@identificator}' not found!\n#{e.message}"
@@ -115,16 +119,14 @@ module ScreenElement
       end
 
       def element
-        raise 'This is an array type Element, call elements method' if
-          @type == :array
+        @element = elements.first if @type == :array
         @element || find_element(@type, @identificator)
       end
 
       def elements
-        raise 'This is not an array type Element, call element method' unless
-          @type == :array
-        find_elements(:id, @identificator)
-          .each.collect { |e| Element.new(:element, e) }
+        type = :id
+        type = @type unless @type == :array
+        find_elements(type, @identificator)
       end
     end
   end

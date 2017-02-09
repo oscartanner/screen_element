@@ -50,6 +50,10 @@ module ScreenElement
       def self.close_app
         $driver.close_app
       end
+
+      def self.navigate_back
+        $driver.back
+      end
     end
   end
 end
