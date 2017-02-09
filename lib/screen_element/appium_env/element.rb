@@ -3,6 +3,8 @@ module ScreenElement
     class Element < World
       include OCRHelperModule
 
+      attr_accessor :element
+
       def initialize(type, identificator)
         case type
         when :desc
@@ -11,6 +13,10 @@ module ScreenElement
         when :text
           @type = :xpath
           @identificator = "//*[@text='#{identificator}']"
+        when :element
+          @type = type
+          @identificator = identificator
+          @element = identificator
         else
           @type = type
           @identificator = identificator
@@ -108,10 +114,17 @@ module ScreenElement
         element.text
       end
 
-      private
-
       def element
-        find_element(@type, @identificator)
+        raise 'This is an array type Element, call elements method' if
+          @type == :array
+        @element || find_element(@type, @identificator)
+      end
+
+      def elements
+        raise 'This is not an array type Element, call element method' unless
+          @type == :array
+        find_elements(:id, @identificator)
+          .each.collect { |e| Element.new(:element, e) }
       end
     end
   end
