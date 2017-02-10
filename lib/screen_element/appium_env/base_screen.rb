@@ -1,5 +1,5 @@
 module ScreenElement
-  module AppiumEnv
+  module AppiumEnv   
     class BaseScreen
       class << self
         def element(name, type = :pending, identificator = '')

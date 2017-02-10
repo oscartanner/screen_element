@@ -1,6 +1,6 @@
 module ScreenElement
   module AppiumEnv
-    class Element < World
+    class BaseElement < World
       include OCRHelperModule
 
       attr_accessor :element
@@ -99,14 +99,7 @@ module ScreenElement
       end
 
       def enter(text, opt = {})
-        close_keyboard = opt.fetch(:close_keyboard, false)
-
         element.send_keys text
-        begin
-          hide_keyboard if close_keyboard
-        rescue
-          # If an error occurs here, is because the keyboard is already hidden
-        end
       end
 
       def checked?
