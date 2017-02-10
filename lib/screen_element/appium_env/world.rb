@@ -26,7 +26,12 @@ module ScreenElement
       end
 
       def self.reinstall_app
-        $driver.remove_app ScreenElement::AppiumEnv::World.caps[:caps][:appPackage]
+        if caps[:caps][:platformName].casecmp('ios').zero?
+          app = caps[:caps][:bundleId]
+        else
+          app = caps[:caps][:appPackage]
+        end
+        $driver.remove_app app
         $driver.start_driver # TODO: ver se launsh_app funciona
       end
 
