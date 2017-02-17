@@ -107,6 +107,12 @@ module ScreenElement
         element.attribute('checked') == 'true'
       end
 
+      def select_item(text)
+        touch
+        sleep 2
+        Element.new(:text, text).touch
+      end
+
       # TODO: See if would be nice to implement these methods with method missing
       # to avoid creating all these accessor methods for element attributes
       def text
