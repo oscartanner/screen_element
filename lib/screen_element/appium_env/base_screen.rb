@@ -18,6 +18,13 @@ module ScreenElement
       def message(message)
         Element.new(:text, message)
       end
+
+      def drag_to(element)
+        until element.visible?
+          trait.drag(delta_y: 50)
+          sleep 2
+        end
+      end
     end
   end
 end
