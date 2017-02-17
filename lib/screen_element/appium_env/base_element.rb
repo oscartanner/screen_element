@@ -99,6 +99,7 @@ module ScreenElement
       end
 
       def enter(text, opt = {})
+        visible!(opt)
         element.send_keys text
       end
 
