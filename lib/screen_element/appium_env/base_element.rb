@@ -107,6 +107,10 @@ module ScreenElement
         element.attribute('checked') == 'true'
       end
 
+      def enabled?
+        element.attribute('enabled') == 'true'
+      end
+
       def select_item(text)
         touch
         sleep 2

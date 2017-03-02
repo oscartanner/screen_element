@@ -6,7 +6,7 @@ describe 'Element Interface' do
     @interface_methods = [:text, :visible!, :visible?, :not_visible!,
                           :not_visible?, :touch, :drag, :swipe, :enter,
                           :checked?, :element, :element=, :elements,
-                          :select_item]
+                          :select_item, :enabled?]
   end
 
   # after(:each) do
