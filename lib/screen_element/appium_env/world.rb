@@ -25,14 +25,18 @@ module ScreenElement
         File.join(path, file_name)
       end
 
-      def self.reinstall_app
-        if caps[:caps][:platformName].casecmp('ios').zero?
-          app = caps[:caps][:bundleId]
-        else
-          app = caps[:caps][:appPackage]
-        end
+      def self.remove_app
+        app = if caps[:caps][:platformName].casecmp('ios').zero?
+                caps[:caps][:bundleId]
+              else
+                caps[:caps][:appPackage]
+              end
         $driver.remove_app app
-        $driver.start_driver # TODO: ver se launsh_app funciona
+      end
+
+      def self.reinstall_app
+        remove_app
+        $driver.launch_app
       end
 
       def self.promote_appium_methods(opt = {})
