@@ -2,8 +2,8 @@ module ScreenElement
   module AppiumEnv   
     class BaseScreen
       class << self
-        def element(name, type = :pending, identificator = '')
-          define_method(name.to_s) { Element.new type, identificator }
+        def element(name, type = :pending, identificator = '', opt = {})
+          define_method(name.to_s) { Element.new type, identificator, opt }
         end
       end
 

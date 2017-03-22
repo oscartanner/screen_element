@@ -6,6 +6,8 @@ module ScreenElement
       attr_accessor :element
 
       def initialize(type, identificator, opt = {})
+        @index = opt.fetch(:index, nil)
+        
         case type
         when :desc
           @type = :xpath
@@ -17,6 +19,10 @@ module ScreenElement
           @type = type
           @identificator = identificator
           @element = identificator
+        when :index
+          raise 'Index not informed!' if @index.nil?
+          @type = :id
+          @identificator = identificator
         else
           type = opt.fetch(:array_type, :id) if type == :array
           @type = type
@@ -124,6 +130,7 @@ module ScreenElement
       end
 
       def element
+        return elements[@index] unless @index.nil?
         @element || find_element(@type, @identificator)
       end
 

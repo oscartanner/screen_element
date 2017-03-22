@@ -24,7 +24,7 @@ module OCRHelperModule
     img = process_image(
       File.join(@ocr_screenshots_path, "txt_#{text.gsub(' ', '_')}.png")
     )
-    img2 = img.write(File.join(@ocr_screenshots_path, "changed.png"))
+    img2 = img.write(File.join(@ocr_screenshots_path, 'changed.png'))
 
     e = ocr_proc(img2)
     words = ''
@@ -75,9 +75,9 @@ module OCRHelperModule
 
   # tesseract-ocr gem is used here (could get better results)
   def ocr_proc(img)
-    Tesseract::Engine.new { |e|
+    Tesseract::Engine.new do |e|
       e.image = img
-    }
+    end
   end
 
   # Creating a folder in system tmp to store the screenshots
