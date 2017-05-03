@@ -1,0 +1,3 @@
+module BaseScreen
+
+end
