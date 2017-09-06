@@ -88,6 +88,11 @@ module ScreenElement
         element.click
       end
 
+      def double_touch(opt = {})
+        visible!(opt)
+        element.double_touch
+      end
+
       def drag(opt = {})
         delta_x = opt.fetch(:delta_x, 0)
         delta_y = opt.fetch(:delta_y, 0)
