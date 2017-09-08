@@ -2,11 +2,11 @@ require 'screen_element'
 
 describe 'Element Interface' do
   before(:each) do
-    @classes = [ScreenElement::AppiumEnv::BaseElement]
+    @classes = [ScreenElement::BaseElement]
     @interface_methods = [:text, :visible!, :visible?, :not_visible!,
                           :not_visible?, :touch, :drag, :swipe, :enter,
                           :checked?, :element, :element=, :elements,
-                          :select_item, :enabled?]
+                          :select_item, :enabled?, :double_touch]
   end
 
   # after(:each) do
