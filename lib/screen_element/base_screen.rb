@@ -1,29 +1,27 @@
 module ScreenElement
-  module AppiumEnv   
-    class BaseScreen
-      class << self
-        def element(name, type = :pending, identificator = '', opt = {})
-          define_method(name.to_s) { Element.new type, identificator, opt }
-        end
+  class BaseScreen
+    class << self
+      def element(name, type = :pending, identificator = '', opt = {})
+        define_method(name.to_s) { Element.new type, identificator, opt }
       end
+    end
 
-      def initialize(opt = {})
-        check_trait opt
-      end
+    def initialize(opt = {})
+      check_trait opt
+    end
 
-      def check_trait(opt)
-        raise "#{self.class} not found" unless trait.visible?(opt)
-      end
+    def check_trait(opt)
+      raise "#{self.class} not found" unless trait.visible?(opt)
+    end
 
-      def message(message)
-        Element.new(:text, message)
-      end
+    def message(message)
+      Element.new(:text, message)
+    end
 
-      def drag_to(element)
-        until element.visible?
-          trait.drag(delta_y: 50)
-          sleep 2
-        end
+    def drag_to(element)
+      until element.visible?
+        trait.drag(delta_y: 50)
+        sleep 2
       end
     end
   end
