@@ -96,7 +96,7 @@ module ScreenElement
       delta_x = opt.fetch(:delta_x, 0)
       delta_y = opt.fetch(:delta_y, 0)
       Appium::TouchAction.new.long_press(element: element)
-      .move_to(x: delta_x, y: delta_y).release.perform
+                         .move_to(x: delta_x, y: delta_y).release.perform
     end
 
     def swipe(opt = {})
@@ -105,7 +105,7 @@ module ScreenElement
       location = element.location
       # TODO: Remove global variable $driver
       $driver.swipe(start_x: location[:x], start_y: location[:y],
-        delta_x: delta_x, delta_y: delta_y)
+                    offset_x: delta_x, offset_y: delta_y)
     end
 
     def enter(text, opt = {})
