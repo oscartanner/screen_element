@@ -3,13 +3,13 @@ require 'appium_lib'
 module ScreenElement
   class World
     class << self
-      attr_accessor :caps_path, :screenshot_path
+      attr_accessor :caps_file, :screenshot_path, :driver
     end
 
     def self.caps(opt = {})
-      path = opt.fetch(:path, caps_path)
-      raise 'Path is null!! Please set option[:path].' if path.nil?
-      Appium.load_appium_txt file: path, verbose: true
+      file = opt.fetch(:file, caps_file)
+      raise 'File is null!! Please set option[:file].' if file.nil?
+      Appium.load_appium_txt file: file, verbose: true
     end
 
     def self.take_screenshot(opt = {})
@@ -17,10 +17,10 @@ module ScreenElement
 
       file_name =
         opt.fetch(:file_name,
-        "screenshot_#{Time.now.strftime('%Y%m%d%H%M%S')}.png")
+                  "screenshot_#{Time.now.strftime('%Y%m%d%H%M%S')}.png")
       raise 'Path is null!! Please set option[:path].' if path.nil?
 
-      $driver.screenshot(File.join(path, file_name))
+      driver.screenshot(File.join(path, file_name))
       File.join(path, file_name)
     end
 
@@ -30,41 +30,41 @@ module ScreenElement
             else
               caps[:caps][:appPackage]
             end
-      $driver.remove_app app
+      driver.remove_app app
     end
 
     def self.reinstall_app
       remove_app
-      $driver.launch_app
+      driver.launch_app
     end
 
     def self.promote_appium_methods(opt = {})
-      Appium::Driver.new(caps(opt))
+      @driver = Appium::Driver.new(caps(opt))
       Appium.promote_appium_methods self
     end
 
     def self.start_driver
-      $driver.start_driver
+      driver.start_driver
     end
 
     def self.driver_quit
-      $driver.driver_quit
+      driver.driver_quit
     end
 
     def self.launch_app
-      $driver.launch_app
+      driver.launch_app
     end
 
     def self.close_app
-      $driver.close_app
+      driver.close_app
     end
 
     def self.navigate_back
-      $driver.back
+      driver.back
     end
 
     def self.source
-      $driver.get_source
+      driver.get_source
     end
   end
 end

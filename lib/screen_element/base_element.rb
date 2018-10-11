@@ -56,7 +56,7 @@ module ScreenElement
     def visible?(opt = {})
       begin
         visible!(opt)
-      rescue
+      rescue ElementNotFoundError
         return false
       end
       true

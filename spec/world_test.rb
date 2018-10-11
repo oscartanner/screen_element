@@ -1,12 +1,8 @@
 require 'screen_element'
-include ScreenElement
 
 describe World do
-  # before(:each) do
-  # end
 
-  # after(:each) do
-  # end
+  include ScreenElement
 
   describe 'Methods' do
     context 'take_screenshot' do
@@ -29,8 +25,8 @@ describe World do
     end
 
     context 'caps' do
-      exception_message = 'Path is null!! Please set option[:path].'
-      caps_path = File.join(File.dirname(__FILE__),
+      exception_message = 'File is null!! Please set option[:file].'
+      caps_file = File.join(File.dirname(__FILE__),
                             'resources', 'caps.txt')
       it 'If path is null, an exception should be thrown' do
         expect { World.caps }
@@ -38,13 +34,13 @@ describe World do
       end
 
       it 'Path can be set as an class variable' do
-        World.caps_path = caps_path
+        World.caps_file = caps_file
         expect { World.caps }
           .not_to raise_exception
       end
 
       it 'Path can be set as an optional parameter' do
-        expect { World.caps(path: caps_path) }
+        expect { World.caps(file: caps_file) }
           .not_to raise_exception
       end
     end
